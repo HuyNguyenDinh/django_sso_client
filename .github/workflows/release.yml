@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:  # Triggers on every push to the repository
+    branches:
+      - main  # Specify the branch to monitor (e.g., main)
+
+jobs:
+  build-and-publish:
+    name: Build and Publish to PyPI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'  # Adjust to match your project requirements
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          twine upload dist/*
+
+  create-github-release:
+    name: Create GitHub Release
+    needs: build-and-publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Generate Release Name
+        id: release_name
+        run: echo "RELEASE_NAME=$(date +'%Y-%m-%d-%H%M%S')" >> $GITHUB_ENV
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.RELEASE_NAME }}
+          release_name: Release ${{ env.RELEASE_NAME }}
+          body: |
+            ## Changes in this release
+            - Automatically generated release on push.
+          draft: false
+          prerelease: false

@@ -1,0 +1,16 @@
+README.md
+setup.py
+django_sso_client/__init__.py
+django_sso_client/admin.py
+django_sso_client/apps.py
+django_sso_client/authentication.py
+django_sso_client/models.py
+django_sso_client/settings.py
+django_sso_client/tests.py
+django_sso_client/views.py
+django_sso_client.egg-info/PKG-INFO
+django_sso_client.egg-info/SOURCES.txt
+django_sso_client.egg-info/dependency_links.txt
+django_sso_client.egg-info/requires.txt
+django_sso_client.egg-info/top_level.txt
+django_sso_client/migrations/__init__.py
