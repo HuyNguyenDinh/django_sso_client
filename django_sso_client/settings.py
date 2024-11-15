@@ -10,8 +10,13 @@ DEFAULT_SETTINGS = {
     "USER_CACHE_KEY_FORMAT": "sso:client:user:{}"
 }
 
+class ClientSettings(object):
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+
 def get_settings():
-    settings = getattr(django_settings, "SSO_CLIENT", {})
+    settings_dict = getattr(django_settings, "SSO_CLIENT", {})
+    settings = ClientSettings(**settings_dict)
     for k, v in DEFAULT_SETTINGS.items():
         settings.setdefault(k, v)
     return settings
