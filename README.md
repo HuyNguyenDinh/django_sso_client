@@ -8,6 +8,17 @@ INSTALLED_APPS = {
     ...
 }
 
+REST_FRAMEWORK = {
+    ...,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        ...,
+        'django_sso_client.authentication.SSOAuthentication',
+        'your_custom_middleware',
+        ...
+    ),
+    ...
+}
+
 SSO_CLIENT = {
     "METADATA": "http://localhost:8000/.well-known/openid-configuration",
     "AUTH_HEADER_TYPES": ["Bearer"],
