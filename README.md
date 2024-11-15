@@ -35,3 +35,10 @@ SSO_CLIENT = {
     },
     "USER_CACHE_KEY_FORMAT": "sso:client:user:{}"
 }
+
+AUTHLIB_OAUTH_CLIENTS = {
+    'sso': {
+        'client_id': 'client_id',
+        "client_secret": 'client_secret',
+    }
+}
