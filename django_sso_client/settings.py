@@ -17,7 +17,7 @@ class ClientSettings(object):
 def get_settings():
     settings_dict = getattr(django_settings, "SSO_CLIENT", {})
     for k, v in DEFAULT_SETTINGS.items():
-        settings.setdefault(k, v)
+        settings_dict.setdefault(k, v)
     settings = ClientSettings(**settings_dict)
     return settings
 
