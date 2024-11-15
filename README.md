@@ -1,10 +1,17 @@
-Authentication Middleware for Django application following OpenID connect. Built on top of drf-simeplejwt and Authlib
+# Authentication Middleware for Django Application
 
-Add following settings to Django settings
+An authentication middleware for Django applications following OpenID Connect. Built on top of **drf-simplejwt** and **Authlib**.
 
+## Configuration
+
+### Add the following settings to your Django `settings.py`
+
+#### 1. **Installed Apps**
+
+```python
 INSTALLED_APPS = {
     ...,
-    django_sso_client,
+    'django_sso_client',
     ...
 }
 
